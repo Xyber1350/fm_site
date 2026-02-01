@@ -6,6 +6,7 @@ import { MdxRenderer } from '@/components/content/MdxRenderer';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { Button } from '@/components/ui/Button';
 import { serviceSections } from '@/data/service-sections';
+import { GearsAnimation } from '@/components/ui/GearsAnimation';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -345,9 +346,7 @@ export default async function ServicePage({ params }: PageProps) {
                 </Button>
               </div>
               <div className="flex-[1_1_calc(50%-15px)] max-mobile:flex-[1_1_100%] flex justify-center">
-                <div className="gear-animation-wrapper">
-                  <Image src="/images/icons/gear.svg" alt="" width={300} height={300} />
-                </div>
+                <GearsAnimation className="w-full max-w-[500px]" />
               </div>
             </div>
           </div>

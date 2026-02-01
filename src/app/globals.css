@@ -141,11 +141,29 @@
   }
 }
 
-@keyframes gear-rotate {
+@keyframes gear-rotate-cw {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-.gear-animation-wrapper {
-  animation: gear-rotate 60s linear infinite;
+@keyframes gear-rotate-ccw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes gear-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.gear-rotate-cw {
+  animation: gear-rotate-cw 60s linear infinite;
+}
+
+.gear-rotate-ccw {
+  animation: gear-rotate-ccw 45s linear infinite;
+}
+
+.gear-fade {
+  animation: gear-fade 6s linear infinite;
 }

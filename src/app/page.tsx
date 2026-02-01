@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
+import { GearsAnimation } from '@/components/ui/GearsAnimation';
 
 const services = [
   {
@@ -219,15 +220,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="flex-[0_0_45%] max-mobile:hidden flex items-center justify-center p-[20px]">
-              <div className="gear-animation-wrapper">
-                <Image
-                  src="/images/icons/gear.svg"
-                  alt="Gear animation"
-                  width={400}
-                  height={400}
-                  className="opacity-30"
-                />
-              </div>
+              <GearsAnimation className="w-full max-w-[500px]" />
             </div>
           </div>
         </div>
