@@ -6,9 +6,11 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { siteConfig, navigation } from '@/config/site';
 import { MobileMenu } from './MobileMenu';
+import { MegaMenu } from './MegaMenu';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const pathname = usePathname();
 
   return (
@@ -31,19 +33,39 @@ export function Header() {
 
               <nav className="flex-1 hidden mobile:block">
                 <ul className="flex gap-[40px] justify-center">
-                  {navigation.map(({ label, href }) => (
-                    <li key={href}>
-                      <Link
-                        href={href}
-                        className={`text-[20px] font-medium transition-opacity duration-300 hover:opacity-70 relative
-                          ${pathname.startsWith(href) ? 'text-blue after:w-full' : 'text-[#333] hover:text-blue'}
-                          after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:h-[2px] after:bg-blue after:transition-all after:duration-300 hover:after:w-full
-                        `}
-                      >
-                        {label}
-                      </Link>
-                    </li>
-                  ))}
+                  {navigation.map(({ label, href }) => {
+                    const isServices = href === '/uslugi/';
+
+                    if (isServices) {
+                      return (
+                        <li key={href}>
+                          <button
+                            onClick={() => setMegaMenuOpen(true)}
+                            className={`text-[20px] font-medium transition-opacity duration-300 hover:opacity-70 relative cursor-pointer
+                              ${pathname.startsWith(href) ? 'text-blue after:w-full' : 'text-[#333] hover:text-blue'}
+                              after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:h-[2px] after:bg-blue after:transition-all after:duration-300 hover:after:w-full
+                            `}
+                          >
+                            {label}
+                          </button>
+                        </li>
+                      );
+                    }
+
+                    return (
+                      <li key={href}>
+                        <Link
+                          href={href}
+                          className={`text-[20px] font-medium transition-opacity duration-300 hover:opacity-70 relative
+                            ${pathname.startsWith(href) ? 'text-blue after:w-full' : 'text-[#333] hover:text-blue'}
+                            after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:h-[2px] after:bg-blue after:transition-all after:duration-300 hover:after:w-full
+                          `}
+                        >
+                          {label}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </nav>
 
@@ -73,6 +95,15 @@ export function Header() {
       <MobileMenu
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
+        onOpenMegaMenu={() => {
+          setMobileMenuOpen(false);
+          setMegaMenuOpen(true);
+        }}
+      />
+
+      <MegaMenu
+        isOpen={megaMenuOpen}
+        onClose={() => setMegaMenuOpen(false)}
       />
     </>
   );

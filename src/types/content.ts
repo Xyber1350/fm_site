@@ -7,6 +7,15 @@ export interface ServiceMeta {
   parent?: string;
 }
 
+export interface SubServiceMeta {
+  title: string;
+  slug: string;
+  description: string;
+  parent: string;
+  order?: number;
+  image?: string;
+}
+
 export interface CaseMeta {
   title: string;
   slug: string;

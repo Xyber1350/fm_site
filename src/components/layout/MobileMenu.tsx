@@ -8,9 +8,10 @@ import { siteConfig, navigation } from '@/config/site';
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenMegaMenu?: () => void;
 }
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, onOpenMegaMenu }: MobileMenuProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -50,17 +51,32 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         <nav>
           <ul className="flex flex-col gap-[20px]">
-            {navigation.map(({ label, href }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  onClick={onClose}
-                  className="text-[20px] font-medium text-blue hover:opacity-70 transition-opacity"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+            {navigation.map(({ label, href }) => {
+              if (href === '/uslugi/' && onOpenMegaMenu) {
+                return (
+                  <li key={href}>
+                    <button
+                      onClick={onOpenMegaMenu}
+                      className="text-[20px] font-medium text-blue hover:opacity-70 transition-opacity cursor-pointer"
+                    >
+                      {label} &rarr;
+                    </button>
+                  </li>
+                );
+              }
+
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    onClick={onClose}
+                    className="text-[20px] font-medium text-blue hover:opacity-70 transition-opacity"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
