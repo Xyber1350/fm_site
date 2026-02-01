@@ -2,6 +2,14 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faGear,
+  faCog,
+  faChartLine,
+  faBullseye,
+  faRocket,
+} from '@fortawesome/free-solid-svg-icons';
 import { TagFilter } from '@/components/ui/TagFilter';
 
 interface CaseItem {
@@ -25,6 +33,8 @@ const cardGradients = [
   'from-[#16213e] to-[#0f3460]',
 ];
 
+const cardIcons = [faGear, faChartLine, faBullseye, faRocket, faCog];
+
 export function CasesGrid({ cases, tags }: CasesGridProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
@@ -43,11 +53,36 @@ export function CasesGrid({ cases, tags }: CasesGridProps) {
             href={`/keysy/${caseItem.slug}/`}
             className="group block rounded-card overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-[3px]"
           >
-            {/* Gradient header */}
-            <div className={`bg-gradient-to-r ${cardGradients[index % cardGradients.length]} p-[25px] max-mobile:p-[20px] relative overflow-hidden`}>
-              <div className="absolute top-[-10px] right-[-10px] text-[120px] font-black text-white/5 leading-none select-none max-mobile:text-[80px]">
-                {String(index + 1).padStart(2, '0')}
+            {/* Gradient header with gear animation */}
+            <div className={`bg-gradient-to-r ${cardGradients[index % cardGradients.length]} p-[25px] max-mobile:p-[20px] relative overflow-hidden min-h-[160px] max-mobile:min-h-[140px]`}>
+              {/* Animated gears background */}
+              <div className="absolute top-[-15px] right-[-15px] opacity-[0.07] group-hover:opacity-[0.12] transition-opacity duration-700">
+                <FontAwesomeIcon
+                  icon={faGear}
+                  className="text-[100px] text-white case-gear-cw max-mobile:text-[70px]"
+                />
               </div>
+              <div className="absolute bottom-[-8px] right-[55px] opacity-[0.05] group-hover:opacity-[0.1] transition-opacity duration-700">
+                <FontAwesomeIcon
+                  icon={faCog}
+                  className="text-[60px] text-white case-gear-ccw max-mobile:text-[45px]"
+                />
+              </div>
+
+              {/* Icon + number */}
+              <div className="flex items-center gap-[10px] mb-[12px] relative z-10">
+                <div className="w-[32px] h-[32px] rounded-[6px] bg-white/15 flex items-center justify-center">
+                  <FontAwesomeIcon
+                    icon={cardIcons[index % cardIcons.length]}
+                    className="text-[14px] text-white/80"
+                  />
+                </div>
+                <span className="text-[13px] font-bold text-white/30 tracking-wider">
+                  #{String(index + 1).padStart(2, '0')}
+                </span>
+              </div>
+
+              {/* Tags */}
               <div className="flex flex-wrap gap-[6px] mb-[12px] relative z-10">
                 {caseItem.tags.map((tag) => (
                   <span
@@ -58,6 +93,8 @@ export function CasesGrid({ cases, tags }: CasesGridProps) {
                   </span>
                 ))}
               </div>
+
+              {/* Title */}
               <h3 className="text-white text-[22px] leading-[1.2] relative z-10 max-mobile:text-[18px]">
                 {caseItem.title}
               </h3>

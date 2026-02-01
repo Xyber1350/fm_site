@@ -193,3 +193,12 @@
   opacity: 0;
   animation: mega-slide-up 0.4s ease-out forwards;
 }
+
+/* Case card gears */
+.case-gear-cw {
+  animation: gear-rotate-cw 30s linear infinite;
+}
+
+.case-gear-ccw {
+  animation: gear-rotate-ccw 22s linear infinite;
+}
