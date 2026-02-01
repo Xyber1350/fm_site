@@ -2,6 +2,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  skipTrailingSlashRedirect: true,
   images: {
     formats: ['image/webp'],
     deviceSizes: [640, 800, 1200, 1400],
