@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'NunitoSans';
+  src: url('/fonts/NunitoSans-VariableFont.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NunitoSans';
+  src: url('/fonts/NunitoSans-Italic.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-blue: #0073E6;
+  --color-blue-hover: #005bb5;
+  --color-light-blue: #F3F9FF;
+  --color-l-light-blue: #FAFCFF;
+  --color-gray: #F9F9F9;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --font-sans: 'NunitoSans', sans-serif;
+
+  --radius-card: 20px;
+  --radius-btn: 8px;
+  --radius-modal: 10px;
+
+  --shadow-card: 0px 4px 22px 0px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0px 4px 27px 0px rgba(0, 0, 0, 0.23);
+  --shadow-header: 0px 4px 22px 0px rgba(0, 0, 0, 0.06);
+
+  --breakpoint-mobile: 800px;
+  --breakpoint-tablet: 1200px;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --container-max: 1200px;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--color-black);
+    background: var(--color-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
+  }
+
+  h1 {
+    font-size: 118px;
+    font-weight: 800;
+    color: var(--color-blue);
+  }
+
+  h1 span {
+    font-size: 62px;
+    font-weight: 700;
+    color: var(--color-black);
+    display: block;
+  }
+
+  h2 {
+    font-size: 62px;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  @media (max-width: 800px) {
+    h1 {
+      font-size: 48px;
+    }
+
+    h1 span {
+      font-size: 32px;
+    }
+
+    h2 {
+      font-size: 36px;
+    }
+
+    h3 {
+      font-size: 24px;
+    }
+
+    body {
+      font-size: 16px;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gear-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.gear-animation-wrapper {
+  animation: gear-rotate 60s linear infinite;
 }
