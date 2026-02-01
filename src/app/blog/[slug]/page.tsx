@@ -54,53 +54,76 @@ export default async function BlogPostPage({ params }: PageProps) {
   };
 
   return (
-    <main className="pt-[120px] pb-[60px] max-mobile:pt-[80px]">
+    <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <article className="max-w-[900px] mx-auto px-[20px]">
-        <Breadcrumbs
-          items={[
-            { label: 'Главная', href: '/' },
-            { label: 'Блог', href: '/blog/' },
-            { label: post.meta.title },
-          ]}
-        />
 
-        <div className="flex flex-wrap gap-[8px] mb-[20px]">
-          {post.meta.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-[13px] font-semibold text-blue bg-light-blue px-[12px] py-[5px] rounded-[4px]"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+      {/* Hero */}
+      <section className="bg-gray">
+        <div className="max-w-[var(--container-max)] mx-auto px-[20px] pt-[20px] pb-[30px]">
+          <Breadcrumbs
+            items={[
+              { label: 'Главная', href: '/' },
+              { label: 'Блог', href: '/blog/' },
+              { label: post.meta.title },
+            ]}
+          />
 
-        <h1 className="mb-[15px]">{post.meta.title}</h1>
+          <div className="flex flex-wrap gap-[8px] mb-[15px]">
+            {post.meta.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-[12px] font-semibold text-blue bg-light-blue px-[12px] py-[5px] rounded-[4px]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
 
-        <time className="block mb-[30px] text-[14px] text-[#999]">
-          {new Date(post.meta.date).toLocaleDateString('ru-RU', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </time>
+          <h1 className="text-[42px] font-bold text-blue leading-[1.15] mb-[15px] max-mobile:text-[28px]">
+            {post.meta.title}
+          </h1>
 
-        <MdxRenderer source={post.content} />
-
-        <div className="mt-[60px] bg-light-blue rounded-card p-[40px] text-center max-mobile:p-[20px]">
-          <h2 className="mb-[15px]">Нужна помощь с продвижением?</h2>
-          <p className="text-[18px] font-light mb-[30px] text-[#555] max-mobile:text-[16px]">
-            Закажите бесплатный аудит вашего сайта
+          <p className="text-[18px] font-light max-w-[700px] mb-[10px] max-mobile:text-[16px]">
+            {post.meta.description}
           </p>
-          <Button variant="blue" href="/kontakty/">
-            Заказать аудит
-          </Button>
+
+          <time className="block text-[14px] text-[#999]">
+            {new Date(post.meta.date).toLocaleDateString('ru-RU', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </time>
         </div>
-      </article>
+      </section>
+
+      {/* Content */}
+      <section className="mt-[40px] mb-[60px] max-mobile:mt-[30px] max-mobile:mb-[40px]">
+        <article className="max-w-[800px] mx-auto px-[20px]">
+          <MdxRenderer source={post.content} />
+        </article>
+      </section>
+
+      {/* CTA */}
+      <section className="mb-[60px] max-mobile:mb-[40px]">
+        <div className="max-w-[var(--container-max)] mx-auto px-[20px]">
+          <div
+            className="bg-blue rounded-card p-[50px] text-white text-center max-mobile:p-[25px]"
+            style={{ backgroundImage: 'url(/images/bg/bg-blue-block.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+          >
+            <h2 className="text-white mb-[15px]">Нужна помощь с продвижением?</h2>
+            <p className="text-[18px] font-light mb-[30px] opacity-90 max-mobile:text-[16px]">
+              Закажите бесплатный аудит вашего сайта
+            </p>
+            <Button variant="white" href="/kontakty/">
+              Заказать аудит
+            </Button>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

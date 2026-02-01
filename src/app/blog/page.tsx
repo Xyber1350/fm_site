@@ -25,23 +25,30 @@ export default function BlogPage() {
   }));
 
   return (
-    <main className="pt-[120px] pb-[60px] max-mobile:pt-[80px]">
-      <div className="max-w-[1200px] mx-auto px-[20px]">
-        <Breadcrumbs
-          items={[
-            { label: 'Главная', href: '/' },
-            { label: 'Блог' },
-          ]}
-        />
+    <main>
+      <section className="bg-gray">
+        <div className="max-w-[var(--container-max)] mx-auto px-[20px] pt-[20px] pb-[40px] max-mobile:pb-[30px]">
+          <Breadcrumbs
+            items={[
+              { label: 'Главная', href: '/' },
+              { label: 'Блог' },
+            ]}
+          />
+          <h1 className="mb-[20px]">
+            Наш <span>блог</span>
+          </h1>
+          <p className="text-[20px] font-light mb-[10px] max-w-[700px] max-mobile:text-[16px]">
+            Делимся опытом: разбираем реальные задачи, ошибки и решения
+            в digital-маркетинге.
+          </p>
+        </div>
+      </section>
 
-        <h1 className="mb-[40px]">Блог</h1>
-        <p className="text-[20px] font-light mb-[40px] max-w-[800px] max-mobile:text-[16px]">
-          Делимся опытом: разбираем реальные задачи, ошибки и решения
-          в digital-маркетинге.
-        </p>
-
-        <BlogGrid posts={serialized} tags={tags} />
-      </div>
+      <section className="mt-[40px] mb-[60px] max-mobile:mt-[20px] max-mobile:mb-[40px]">
+        <div className="max-w-[var(--container-max)] mx-auto px-[20px]">
+          <BlogGrid posts={serialized} tags={tags} />
+        </div>
+      </section>
     </main>
   );
 }

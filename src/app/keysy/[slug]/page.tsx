@@ -38,11 +38,8 @@ export default async function CasePage({ params }: PageProps) {
   return (
     <main>
       {/* Hero */}
-      <section
-        className="relative bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/bg/home-bg.webp)' }}
-      >
-        <div className="max-w-[var(--container-max)] mx-auto px-[20px] py-[20px]">
+      <section className="bg-gray">
+        <div className="max-w-[var(--container-max)] mx-auto px-[20px] pt-[20px] pb-[30px]">
           <Breadcrumbs
             items={[
               { label: 'Главная', href: '/' },

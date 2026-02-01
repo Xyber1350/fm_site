@@ -26,11 +26,8 @@ export default function KeysyPage() {
 
   return (
     <main>
-      <section
-        className="relative bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/bg/home-bg.webp)' }}
-      >
-        <div className="max-w-[var(--container-max)] mx-auto px-[20px] py-[20px]">
+      <section className="bg-gray">
+        <div className="max-w-[var(--container-max)] mx-auto px-[20px] pt-[20px] pb-[40px] max-mobile:pb-[30px]">
           <Breadcrumbs
             items={[
               { label: 'Главная', href: '/' },
@@ -40,7 +37,7 @@ export default function KeysyPage() {
           <h1 className="mb-[20px]">
             Наши <span>кейсы</span>
           </h1>
-          <p className="text-[20px] font-light mb-[30px] max-w-[700px] max-mobile:text-[16px]">
+          <p className="text-[20px] font-light mb-[10px] max-w-[700px] max-mobile:text-[16px]">
             Не обещания, а результаты. Каждый кейс — это реальный проект
             с измеримыми показателями.
           </p>
