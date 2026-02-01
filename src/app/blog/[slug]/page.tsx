@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getBlogPosts, getBlogPostBySlug } from '@/lib/content';
+import { extractToc, calculateReadingTime } from '@/lib/article-utils';
 import { MdxRenderer } from '@/components/content/MdxRenderer';
+import { TableOfContents } from '@/components/content/TableOfContents';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { Button } from '@/components/ui/Button';
 
@@ -35,6 +37,9 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = getBlogPostBySlug(slug);
 
   if (!post) notFound();
+
+  const toc = extractToc(post.content);
+  const readingTime = calculateReadingTime(post.content);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -90,19 +95,24 @@ export default async function BlogPostPage({ params }: PageProps) {
             {post.meta.description}
           </p>
 
-          <time className="block text-[14px] text-[#999]">
-            {new Date(post.meta.date).toLocaleDateString('ru-RU', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </time>
+          <div className="flex items-center gap-[15px] text-[14px] text-[#999]">
+            <time>
+              {new Date(post.meta.date).toLocaleDateString('ru-RU', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
+            <span className="w-[4px] h-[4px] rounded-full bg-[#ccc]" />
+            <span>{readingTime} мин. чтения</span>
+          </div>
         </div>
       </section>
 
       {/* Content */}
       <section className="mt-[40px] mb-[60px] max-mobile:mt-[30px] max-mobile:mb-[40px]">
         <article className="max-w-[800px] mx-auto px-[20px]">
+          <TableOfContents items={toc} />
           <MdxRenderer source={post.content} />
         </article>
       </section>

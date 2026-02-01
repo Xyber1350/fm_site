@@ -1,22 +1,53 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { InfoBox, StatsGrid, MidCta, KeyTakeaway } from './MdxBlocks';
 
 interface MdxRendererProps {
   source: string;
 }
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\sа-яёА-ЯЁ-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+function getTextContent(children: React.ReactNode): string {
+  if (typeof children === 'string') return children;
+  if (typeof children === 'number') return String(children);
+  if (Array.isArray(children)) return children.map(getTextContent).join('');
+  if (children && typeof children === 'object' && 'props' in children) {
+    const el = children as { props: { children?: React.ReactNode } };
+    return getTextContent(el.props.children);
+  }
+  return '';
+}
+
 const components = {
-  h2: (props: React.ComponentProps<'h2'>) => (
-    <h2
-      className="text-[32px] font-bold mt-[50px] mb-[20px] pb-[12px] border-b-2 border-blue/15 max-mobile:text-[24px] max-mobile:mt-[35px]"
-      {...props}
-    />
-  ),
-  h3: (props: React.ComponentProps<'h3'>) => (
-    <h3
-      className="text-[22px] font-bold mt-[35px] mb-[12px] pl-[14px] border-l-3 border-blue max-mobile:text-[19px] max-mobile:mt-[25px]"
-      {...props}
-    />
-  ),
+  h2: (props: React.ComponentProps<'h2'>) => {
+    const text = getTextContent(props.children);
+    const id = slugify(text);
+    return (
+      <h2
+        id={id}
+        className="text-[32px] font-bold mt-[50px] mb-[20px] pb-[12px] border-b-2 border-blue/15 max-mobile:text-[24px] max-mobile:mt-[35px] scroll-mt-[100px]"
+        {...props}
+      />
+    );
+  },
+  h3: (props: React.ComponentProps<'h3'>) => {
+    const text = getTextContent(props.children);
+    const id = slugify(text);
+    return (
+      <h3
+        id={id}
+        className="text-[22px] font-bold mt-[35px] mb-[12px] pl-[14px] border-l-3 border-blue max-mobile:text-[19px] max-mobile:mt-[25px] scroll-mt-[100px]"
+        {...props}
+      />
+    );
+  },
   h4: (props: React.ComponentProps<'h4'>) => (
     <h4
       className="text-[18px] font-bold mt-[25px] mb-[10px] max-mobile:text-[17px]"
@@ -61,6 +92,10 @@ const components = {
   td: (props: React.ComponentProps<'td'>) => (
     <td className="p-[12px] border-t border-[#eee] text-[15px]" {...props} />
   ),
+  InfoBox,
+  StatsGrid,
+  MidCta,
+  KeyTakeaway,
 };
 
 export function MdxRenderer({ source }: MdxRendererProps) {
