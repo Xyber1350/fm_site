@@ -38,7 +38,10 @@ export default async function CasePage({ params }: PageProps) {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-gradient-to-r from-[#0a0a1a] to-[#0f3460] text-white">
+      <section
+        className="relative bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/images/bg/home-bg.webp)' }}
+      >
         <div className="max-w-[var(--container-max)] mx-auto px-[20px] py-[20px]">
           <Breadcrumbs
             items={[
@@ -48,27 +51,27 @@ export default async function CasePage({ params }: PageProps) {
             ]}
           />
 
-          <div className="flex flex-wrap gap-[8px] mb-[20px]">
+          <div className="flex flex-wrap gap-[8px] mb-[15px]">
             {caseItem.meta.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[12px] font-bold text-white/90 bg-white/15 backdrop-blur-sm px-[12px] py-[5px] rounded-[4px] uppercase tracking-wider"
+                className="text-[12px] font-semibold text-blue bg-light-blue px-[12px] py-[5px] rounded-[4px]"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          <h1 className="text-[42px] font-bold text-white leading-[1.15] mb-[15px] max-mobile:text-[28px]">
+          <h1 className="text-[42px] font-bold text-blue leading-[1.15] mb-[15px] max-mobile:text-[28px]">
             {caseItem.meta.title}
           </h1>
 
-          <p className="text-[20px] font-light opacity-80 max-w-[700px] mb-[15px] max-mobile:text-[16px]">
+          <p className="text-[18px] font-light max-w-[700px] mb-[10px] max-mobile:text-[16px]">
             {caseItem.meta.description}
           </p>
 
           {caseItem.meta.date && (
-            <time className="block text-[14px] text-white/50 pb-[10px]">
+            <time className="block text-[14px] text-[#999] pb-[10px]">
               {new Date(caseItem.meta.date).toLocaleDateString('ru-RU', {
                 year: 'numeric',
                 month: 'long',
