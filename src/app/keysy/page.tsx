@@ -25,23 +25,33 @@ export default function KeysyPage() {
   }));
 
   return (
-    <main className="pt-[120px] pb-[60px] max-mobile:pt-[80px]">
-      <div className="max-w-[1200px] mx-auto px-[20px]">
-        <Breadcrumbs
-          items={[
-            { label: 'Главная', href: '/' },
-            { label: 'Кейсы' },
-          ]}
-        />
+    <main>
+      <section
+        className="relative bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/images/bg/home-bg.webp)' }}
+      >
+        <div className="max-w-[var(--container-max)] mx-auto px-[20px] py-[20px]">
+          <Breadcrumbs
+            items={[
+              { label: 'Главная', href: '/' },
+              { label: 'Кейсы' },
+            ]}
+          />
+          <h1 className="mb-[20px]">
+            Наши <span>кейсы</span>
+          </h1>
+          <p className="text-[20px] font-light mb-[30px] max-w-[700px] max-mobile:text-[16px]">
+            Не обещания, а результаты. Каждый кейс — это реальный проект
+            с измеримыми показателями.
+          </p>
+        </div>
+      </section>
 
-        <h1 className="mb-[40px]">Кейсы</h1>
-        <p className="text-[20px] font-light mb-[40px] max-w-[800px] max-mobile:text-[16px]">
-          Не обещания, а результаты. Каждый кейс — это реальный проект
-          с измеримыми показателями.
-        </p>
-
-        <CasesGrid cases={serialized} tags={tags} />
-      </div>
+      <section className="mt-[40px] mb-[60px] max-mobile:mt-[20px] max-mobile:mb-[40px]">
+        <div className="max-w-[var(--container-max)] mx-auto px-[20px]">
+          <CasesGrid cases={serialized} tags={tags} />
+        </div>
+      </section>
     </main>
   );
 }
